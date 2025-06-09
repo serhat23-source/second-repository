@@ -1,3 +1,4 @@
 def hello():
-	return
+	return "Serhat is the new king"
+print(hello())
 
