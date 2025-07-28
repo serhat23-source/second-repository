@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_dgs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "serhat25adls_connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "drinks.csv",
+				"fileSystem": "drinks"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
