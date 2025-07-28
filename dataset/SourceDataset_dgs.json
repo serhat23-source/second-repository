@@ -1,0 +1,43 @@
+{
+	"name": "SourceDataset_dgs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "drinksHttp",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "country",
+				"type": "String"
+			},
+			{
+				"name": "beer_servings",
+				"type": "String"
+			},
+			{
+				"name": "spirit_servings",
+				"type": "String"
+			},
+			{
+				"name": "wine_servings",
+				"type": "String"
+			},
+			{
+				"name": "total_litres_of_pure_alcohol",
+				"type": "String"
+			}
+		]
+	}
+}
