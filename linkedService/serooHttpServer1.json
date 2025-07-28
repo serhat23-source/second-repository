@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://raw.githubusercontent.com/fivethirtyeight/data/master/alcohol-consumption/drinks.csv",
+			"url": "https://raw.githubusercontent.com/fivethirt yeight/data/master/alcohol- consumption/drinks.csv",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		},
