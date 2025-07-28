@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "drinks.csv",
-				"fileSystem": "serhat25adls"
+				"folderPath": "drinks"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
