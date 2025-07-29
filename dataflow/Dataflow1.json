@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DrinksToWarehouse",
+						"referenceName": "DrinksToWarehouse2",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -60,6 +60,12 @@
 				"     skipDuplicateMapOutputs: true) ~> RemoveColumns1",
 				"RemoveColumns1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          country as string,",
+				"          spirit_servings as integer,",
+				"          wine_servings as integer,",
+				"          total_litres_of_pure_alcohol as double",
+				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",

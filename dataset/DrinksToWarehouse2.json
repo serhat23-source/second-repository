@@ -1,0 +1,36 @@
+{
+	"name": "DrinksToWarehouse2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseAnalytics1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "spirit_servings",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "wine_servings",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "total_litres_of_pure_alcohol",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "drinks_cleaned"
+		}
+	}
+}

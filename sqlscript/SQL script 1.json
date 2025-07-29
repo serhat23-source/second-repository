@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "CREATE TABLE dbo.drinks_cleaned (\n    country NVARCHAR(100),\n    spirit_servings INT,\n    wine_servings INT,\n    total_litres_of_pure_alcohol FLOAT\n);",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "seroosqlpool",
+				"poolName": "seroosqlpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
