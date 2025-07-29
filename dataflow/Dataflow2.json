@@ -5,14 +5,38 @@
 		"typeProperties": {
 			"sources": [
 				{
+					"dataset": {
+						"referenceName": "MeriJson",
+						"type": "DatasetReference"
+					},
 					"name": "MeriSource"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "FlattenMeasurements"
+				}
+			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> MeriSource"
+				"source(output(",
+				"          body as (dataUpdatedTime as string, features as (geometry as (coordinates as double[], type as string), properties as (confidence as string, heelAngle as double, lastUpdate as timestamp, lightStatus as string, seaState as string, siteName as string, siteNumber as integer, siteType as string, temperature as short, trend as string, windWaveDir as short), siteNumber as integer, type as string)[], type as string),",
+				"          headers as [string,string]",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     httpMethod: 'GET',",
+				"     timeout: 30,",
+				"     requestInterval: 0,",
+				"     paginationRules: ['supportRFC5988' -> 'true'],",
+				"     responseFormat: ['type' -> 'json', 'documentForm' -> 'documentPerLine']) ~> MeriSource",
+				"MeriSource foldDown(unroll(),",
+				"     mapColumn(",
+				"          body,",
+				"          headers",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> FlattenMeasurements"
 			]
 		}
 	}
