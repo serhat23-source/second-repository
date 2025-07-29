@@ -1,0 +1,12 @@
+{
+	"name": "MeriJson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MeriRest",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
