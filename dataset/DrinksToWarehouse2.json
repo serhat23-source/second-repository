@@ -2,7 +2,7 @@
 	"name": "DrinksToWarehouse2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSynapseAnalytics1",
+			"referenceName": "AzureSynapseLinkedServiceFixed",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -27,10 +27,6 @@
 				"type": "float",
 				"precision": 15
 			}
-		],
-		"typeProperties": {
-			"schema": "dbo",
-			"table": "drinks_cleaned"
-		}
+		]
 	}
 }
