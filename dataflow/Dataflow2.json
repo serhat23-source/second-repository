@@ -30,6 +30,9 @@
 				},
 				{
 					"name": "ExtractFields"
+				},
+				{
+					"name": "RemoveFeatures"
 				}
 			],
 			"scriptLines": [
@@ -55,7 +58,15 @@
 				"          temperature = [\"temperature\"],",
 				"          longitude = [\"coordinates\"][0],",
 				"          latitude = [\"coordinates\"][1]) ~> ExtractFields",
-				"ExtractFields sink(allowSchemaDrift: true,",
+				"ExtractFields select(mapColumn(",
+				"          siteNumber,",
+				"          temperature,",
+				"          longitude,",
+				"          latitude",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RemoveFeatures",
+				"RemoveFeatures sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
 				"     insertable:true,",
