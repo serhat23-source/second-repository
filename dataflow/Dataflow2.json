@@ -9,13 +9,27 @@
 						"referenceName": "MeriJson",
 						"type": "DatasetReference"
 					},
-					"name": "MeriSource"
+					"name": "MeriMeasurements"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSynapseAnalyticsTable2",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
-					"name": "FlattenMeasurements"
+					"name": "ExtractFeatures"
+				},
+				{
+					"name": "FlattenFeatures"
+				},
+				{
+					"name": "ExtractFields"
 				}
 			],
 			"scriptLines": [
@@ -29,14 +43,30 @@
 				"     timeout: 30,",
 				"     requestInterval: 0,",
 				"     paginationRules: ['supportRFC5988' -> 'true'],",
-				"     responseFormat: ['type' -> 'json', 'documentForm' -> 'documentPerLine']) ~> MeriSource",
-				"MeriSource foldDown(unroll(),",
+				"     responseFormat: ['type' -> 'json', 'documentForm' -> 'documentPerLine']) ~> MeriMeasurements",
+				"MeriMeasurements derive(features = body.features) ~> ExtractFeatures",
+				"ExtractFeatures foldDown(unroll(features),",
 				"     mapColumn(",
-				"          body,",
-				"          headers",
+				"          features",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
-				"     skipDuplicateMapOutputs: false) ~> FlattenMeasurements"
+				"     skipDuplicateMapOutputs: false) ~> FlattenFeatures",
+				"FlattenFeatures derive(siteNumber = [\"siteNumber\"],",
+				"          temperature = [\"temperature\"],",
+				"          longitude = [\"coordinates\"][0],",
+				"          latitude = [\"coordinates\"][1]) ~> ExtractFields",
+				"ExtractFields sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
