@@ -27,6 +27,10 @@
 				"type": "float",
 				"precision": 15
 			}
-		]
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "drinks_cleaned"
+		}
 	}
 }
