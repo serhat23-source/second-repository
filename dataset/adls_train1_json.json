@@ -1,0 +1,121 @@
+{
+	"name": "adls_train1_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "serhat-res-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "train1.json",
+				"folderPath": "Trains",
+				"fileSystem": "serhat25adls"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"trainNumber": {
+					"type": "integer"
+				},
+				"departureDate": {
+					"type": "string"
+				},
+				"operatorUICCode": {
+					"type": "integer"
+				},
+				"operatorShortCode": {
+					"type": "string"
+				},
+				"trainType": {
+					"type": "string"
+				},
+				"trainCategory": {
+					"type": "string"
+				},
+				"commuterLineID": {
+					"type": "string"
+				},
+				"runningCurrently": {
+					"type": "boolean"
+				},
+				"cancelled": {
+					"type": "boolean"
+				},
+				"version": {
+					"type": "integer"
+				},
+				"timetableType": {
+					"type": "string"
+				},
+				"timetableAcceptanceDate": {
+					"type": "string"
+				},
+				"timeTableRows": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"stationShortCode": {
+								"type": "string"
+							},
+							"stationUICCode": {
+								"type": "integer"
+							},
+							"countryCode": {
+								"type": "string"
+							},
+							"type": {
+								"type": "string"
+							},
+							"trainStopping": {
+								"type": "boolean"
+							},
+							"commercialStop": {
+								"type": "boolean"
+							},
+							"cancelled": {
+								"type": "boolean"
+							},
+							"scheduledTime": {
+								"type": "string"
+							},
+							"actualTime": {
+								"type": "string"
+							},
+							"differenceInMinutes": {
+								"type": "integer"
+							},
+							"causes": {
+								"type": "array"
+							},
+							"stopSector": {
+								"type": "string"
+							},
+							"commercialTrack": {
+								"type": "string"
+							},
+							"trainReady": {
+								"type": "object",
+								"properties": {
+									"source": {
+										"type": "string"
+									},
+									"accepted": {
+										"type": "boolean"
+									},
+									"timestamp": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
