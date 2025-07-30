@@ -80,7 +80,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "adsl_train2_json",
+						"referenceName": "http_train2_json",
 						"type": "DatasetReference"
 					}
 				]
