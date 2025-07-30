@@ -1,0 +1,17 @@
+{
+	"name": "testhttp1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "testHttpServer1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		},
+		"schema": {}
+	}
+}

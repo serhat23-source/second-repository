@@ -1,14 +1,14 @@
 {
-	"name": "TrainRestJson2",
+	"name": "TestTrainData2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "TestTrainRest",
+			"referenceName": "TestTrainRest2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
-			"relativeUrl": "/api/v1/trains/latest/1/"
+			"relativeUrl": ""
 		},
 		"schema": []
 	}

@@ -1,10 +1,6 @@
 {
 	"name": "CopyTrainJson1",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "TrainRestOG",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "RestResource",
 		"schema": []
