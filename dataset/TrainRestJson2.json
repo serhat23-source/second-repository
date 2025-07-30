@@ -1,0 +1,12 @@
+{
+	"name": "TrainRestJson2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "TrainRestOG2",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}

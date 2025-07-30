@@ -1,0 +1,49 @@
+{
+	"name": "Dataflow4",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "TrainJson1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "TrainJson2",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          body as (cancelled as boolean, commuterLineID as string, departureDate as date, operatorShortCode as string, operatorUICCode as short, runningCurrently as boolean, timeTableRows as (actualTime as string, cancelled as boolean, causes as (categoryCode as string, categoryCodeId as integer, detailedCategoryCode as string, detailedCategoryCodeId as integer)[], commercialStop as boolean, commercialTrack as short, countryCode as string, differenceInMinutes as short, estimateSource as string, liveEstimateTime as string, scheduledTime as string, stationShortCode as string, stationUICCode as short, stopSector as string, trainReady as (accepted as boolean, source as string, timestamp as string), trainStopping as boolean, type as string)[], timetableAcceptanceDate as string, timetableType as string, trainCategory as string, trainNumber as boolean, trainType as string, version as long),",
+				"          headers as [string,string]",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     httpMethod: 'GET',",
+				"     timeout: 30,",
+				"     requestInterval: 0,",
+				"     paginationRules: ['supportRFC5988' -> 'true'],",
+				"     responseFormat: ['type' -> 'json', 'documentForm' -> 'documentPerLine']) ~> source1",
+				"source(output(",
+				"          body as (cancelled as boolean, commuterLineID as string, departureDate as date, operatorShortCode as string, operatorUICCode as short, runningCurrently as boolean, timeTableRows as (actualTime as string, cancelled as boolean, causes as string[], commercialStop as boolean, commercialTrack as short, countryCode as string, differenceInMinutes as short, estimateSource as string, liveEstimateTime as string, scheduledTime as string, stationShortCode as string, stationUICCode as short, stopSector as string, trainReady as (accepted as boolean, source as string, timestamp as string), trainStopping as boolean, type as string)[], timetableAcceptanceDate as string, timetableType as string, trainCategory as string, trainNumber as short, trainType as string, version as long),",
+				"          headers as [string,string]",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     httpMethod: 'GET',",
+				"     timeout: 30,",
+				"     paginationRules: ['supportRFC5988' -> 'true'],",
+				"     responseFormat: ['type' -> 'json', 'documentForm' -> 'arrayOfDocuments']) ~> source2"
+			]
+		}
+	}
+}
