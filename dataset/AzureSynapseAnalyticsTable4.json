@@ -1,0 +1,16 @@
+{
+	"name": "AzureSynapseAnalyticsTable4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "serhat-res-WorkspaceDefaultSqlServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DBName",
+			"table": "TrainData"
+		}
+	}
+}

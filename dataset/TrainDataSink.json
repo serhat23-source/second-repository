@@ -1,0 +1,16 @@
+{
+	"name": "TrainDataSink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "serhat-res-WorkspaceDefaultSqlServer",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TrainData"
+		}
+	}
+}
