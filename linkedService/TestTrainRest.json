@@ -4,7 +4,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://rata.digitraffic.fi/api/v1/trains/latest/1/",
+			"url": "https://rata.digitraffic.fi",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		},
