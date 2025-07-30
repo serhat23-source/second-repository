@@ -1,0 +1,101 @@
+{
+	"name": "adsl_train2_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "serhat-res-WorkspaceDefaultStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "train2.csv",
+				"folderPath": "Trains",
+				"fileSystem": "serhat25adls"
+			},
+			"compression": {
+				"type": "gzip"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"trainNumber": {
+					"type": "integer"
+				},
+				"departureDate": {
+					"type": "string"
+				},
+				"operatorUICCode": {
+					"type": "integer"
+				},
+				"operatorShortCode": {
+					"type": "string"
+				},
+				"trainType": {
+					"type": "string"
+				},
+				"trainCategory": {
+					"type": "string"
+				},
+				"commuterLineID": {
+					"type": "string"
+				},
+				"runningCurrently": {
+					"type": "boolean"
+				},
+				"cancelled": {
+					"type": "boolean"
+				},
+				"version": {
+					"type": "integer"
+				},
+				"timetableType": {
+					"type": "string"
+				},
+				"timetableAcceptanceDate": {
+					"type": "string"
+				},
+				"timeTableRows": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"stationShortCode": {
+								"type": "string"
+							},
+							"stationUICCode": {
+								"type": "integer"
+							},
+							"countryCode": {
+								"type": "string"
+							},
+							"type": {
+								"type": "string"
+							},
+							"trainStopping": {
+								"type": "boolean"
+							},
+							"commercialStop": {
+								"type": "boolean"
+							},
+							"cancelled": {
+								"type": "boolean"
+							},
+							"scheduledTime": {
+								"type": "string"
+							},
+							"causes": {
+								"type": "array"
+							},
+							"commercialTrack": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
