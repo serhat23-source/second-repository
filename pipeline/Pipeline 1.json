@@ -130,6 +130,13 @@
 						"referenceName": "Dataflow8",
 						"type": "DataFlowReference"
 					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "serhat25adls_connection",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "serhat25adls/Trains"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"

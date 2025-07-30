@@ -13,9 +13,6 @@
 				"fileName": "train2.csv",
 				"folderPath": "Trains",
 				"fileSystem": "serhat25adls"
-			},
-			"compression": {
-				"type": "gzip"
 			}
 		},
 		"schema": {
