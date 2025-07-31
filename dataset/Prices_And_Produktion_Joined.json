@@ -1,0 +1,16 @@
+{
+	"name": "Prices_And_Produktion_Joined",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseLinkedServiceFixed",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Prices&Prod"
+		}
+	}
+}

@@ -1,0 +1,35 @@
+{
+	"name": "proddataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GitHubLink",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "prod.csv"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "PROD",
+				"type": "String"
+			},
+			{
+				"name": "PART",
+				"type": "String"
+			},
+			{
+				"name": "SUPPLIER",
+				"type": "String"
+			}
+		]
+	}
+}
