@@ -1,0 +1,132 @@
+{
+	"name": "Notebook 1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SeroosSparkPool",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "e8c77dc5-0cc2-4712-8350-b8a374ccf138"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/23b183d5-a30f-46b8-b418-ad060fb67787/resourceGroups/serhat25synapse/providers/Microsoft.Synapse/workspaces/serhat-res/bigDataPools/SeroosSparkPool",
+				"name": "SeroosSparkPool",
+				"type": "Spark",
+				"endpoint": "https://serhat-res.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SeroosSparkPool",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.4",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"# Import pyspark \n",
+					"from pyspark.sql import SparkSession\n",
+					"from pyspark.sql.types import*"
+				],
+				"execution_count": 32
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"# Define variables and connection location\n",
+					"account_name = \"serhat25adls\"\n",
+					"container_name = \"serhat25adls\"\n",
+					"relative_path = \"\"\n",
+					"adls_path = 'abfss://%s@%s.dfs.core.windows.net/%s' % (container_name, account_name, relative_path)"
+				],
+				"execution_count": 33
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df1 = spark.read.option('header', 'true') \\\n",
+					"                .option('delimiter', ',') \\\n",
+					"                .csv(adls_path + '/titanic.csv')"
+				],
+				"execution_count": 34
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df1 = df1.toPandas()"
+				],
+				"execution_count": 35
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df1"
+				],
+				"execution_count": 36
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_females = df1[df1['Sex'] == 'female']\n",
+					"df_females_sorted = df_females.sort_values(by='Fare', ascending=False)\n",
+					""
+				],
+				"execution_count": 37
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"print(df_females_sorted.head())"
+				],
+				"execution_count": 38
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df_spark = spark.createDataFrame(df_females_sorted)\n",
+					"\n",
+					"output_path = 'abfss://serhat25adls@serhat25adls.dfs.core.windows.net/females_sorted/'\n",
+					"\n",
+					"df_spark.coalesce(1).write.mode('overwrite').option('header', True).csv(output_path)\n",
+					"\n",
+					""
+				],
+				"execution_count": 40
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					""
+				],
+				"execution_count": null
+			}
+		]
+	}
+}
