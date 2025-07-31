@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 2",
+	"properties": {
+		"content": {
+			"query": "CREATE TABLE dbo.titanic_transformed_scala (\n    Survived BIT,\n    Pclass SMALLINT,\n    Name NVARCHAR(200),\n    Sex NVARCHAR(20),\n    Age FLOAT,\n    [Siblings_or_Spouses Aboard] SMALLINT,\n    [Parents_or_Children Aboard] SMALLINT,\n    Fare FLOAT,\n    highFare BIT\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    HEAP\n);\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "seroosqlpool",
+				"poolName": "seroosqlpool"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
