@@ -62,8 +62,9 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -71,6 +72,9 @@
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
@@ -89,13 +93,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "proddataset",
+						"referenceName": "prodCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "proddatasetCopy",
+						"referenceName": "prodADLS",
 						"type": "DatasetReference"
 					}
 				]
@@ -116,8 +120,9 @@
 					"source": {
 						"type": "DelimitedTextSource",
 						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
@@ -125,6 +130,9 @@
 					},
 					"sink": {
 						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
@@ -143,13 +151,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "pricesdataset",
+						"referenceName": "pricesCSV",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "PricesDatasetCopy",
+						"referenceName": "PricesADLS",
 						"type": "DatasetReference"
 					}
 				]

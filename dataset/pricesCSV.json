@@ -1,0 +1,33 @@
+{
+	"name": "pricesCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "serhat25adls_connection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "prices.csv",
+				"folderPath": "price&prod",
+				"fileSystem": "serhat25adls"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "PROD",
+				"type": "String"
+			},
+			{
+				"name": "PRICE",
+				"type": "String"
+			}
+		]
+	}
+}

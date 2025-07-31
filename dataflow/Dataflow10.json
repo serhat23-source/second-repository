@@ -6,14 +6,14 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "pricesdataset",
+						"referenceName": "pricesCSV",
 						"type": "DatasetReference"
 					},
 					"name": "prices"
 				},
 				{
 					"dataset": {
-						"referenceName": "proddataset",
+						"referenceName": "prodCSV",
 						"type": "DatasetReference"
 					},
 					"name": "products"
