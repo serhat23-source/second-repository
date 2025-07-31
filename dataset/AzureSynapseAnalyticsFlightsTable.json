@@ -1,0 +1,16 @@
+{
+	"name": "AzureSynapseAnalyticsFlightsTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSynapseLinkedServiceFixed",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "flights_with_seats"
+		}
+	}
+}
