@@ -1,5 +1,5 @@
 {
-	"name": "flights",
+	"name": "FlightsTable",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "FlightsPostgres",

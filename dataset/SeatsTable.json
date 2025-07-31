@@ -1,0 +1,35 @@
+{
+	"name": "SeatsTable",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FlightsPostgres",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzurePostgreSqlTable",
+		"schema": [
+			{
+				"name": "aircraft_code",
+				"type": "character",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "seat_no",
+				"type": "character varying",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "fare_conditions",
+				"type": "character varying",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "bookings",
+			"table": "seats"
+		}
+	}
+}
