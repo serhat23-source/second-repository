@@ -110,6 +110,13 @@
 						"referenceName": "Dataflow11",
 						"type": "DataFlowReference"
 					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "serhat25adls_connection",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "serhat25adls/females_sorted"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
