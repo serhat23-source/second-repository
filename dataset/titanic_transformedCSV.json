@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "titanic_female.csv",
 				"folderPath": "females_sorted",
 				"fileSystem": "serhat25adls"
 			},
