@@ -1,0 +1,16 @@
+{
+	"name": "TitanicHttpserver",
+	"properties": {
+		"annotations": [],
+		"type": "HttpServer",
+		"typeProperties": {
+			"url": "https://web.stanford.edu/class/archive/cs/cs109/cs109.1166/stuff/titanic.csv",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		},
+		"connectVia": {
+			"referenceName": "AutoResolveIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
