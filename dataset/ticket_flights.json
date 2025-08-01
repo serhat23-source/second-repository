@@ -1,0 +1,41 @@
+{
+	"name": "ticket_flights",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FlightsPostgres",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzurePostgreSqlTable",
+		"schema": [
+			{
+				"name": "ticket_no",
+				"type": "character",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "flight_id",
+				"type": "integer",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "fare_conditions",
+				"type": "character varying",
+				"precision": 0,
+				"scale": 0
+			},
+			{
+				"name": "amount",
+				"type": "numeric",
+				"precision": 10,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "bookings",
+			"table": "ticket_flights"
+		}
+	}
+}

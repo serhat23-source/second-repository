@@ -1,0 +1,107 @@
+{
+	"name": "Dataflow12",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "flights_data",
+						"type": "DatasetReference"
+					},
+					"name": "Flights"
+				},
+				{
+					"dataset": {
+						"referenceName": "ticket_flights",
+						"type": "DatasetReference"
+					},
+					"name": "TicketFlights"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_JoinedFlightsSink",
+						"type": "DatasetReference"
+					},
+					"name": "Sink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "JoinedFlights"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          flight_id as integer,",
+				"          flight_no as string,",
+				"          scheduled_departure as timestamp,",
+				"          scheduled_arrival as timestamp,",
+				"          departure_airport as string,",
+				"          arrival_airport as string,",
+				"          status as string,",
+				"          aircraft_code as string,",
+				"          actual_departure as timestamp,",
+				"          actual_arrival as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> Flights",
+				"source(output(",
+				"          ticket_no as string,",
+				"          flight_id as integer,",
+				"          fare_conditions as string,",
+				"          amount as decimal(10,2)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> TicketFlights",
+				"Flights, TicketFlights join(Flights@flight_id == TicketFlights@flight_id,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> JoinedFlights",
+				"JoinedFlights filter(!isNull(amount)) ~> filter1",
+				"filter1 select(mapColumn(",
+				"          flight_id = Flights@flight_id,",
+				"          flight_no,",
+				"          scheduled_departure,",
+				"          scheduled_arrival,",
+				"          departure_airport,",
+				"          arrival_airport,",
+				"          status,",
+				"          aircraft_code,",
+				"          actual_departure,",
+				"          actual_arrival,",
+				"          ticket_no,",
+				"          fare_conditions,",
+				"          amount",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: true,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> Sink"
+			]
+		}
+	}
+}
