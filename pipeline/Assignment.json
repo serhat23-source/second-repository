@@ -19,6 +19,13 @@
 						"referenceName": "Dataflow12",
 						"type": "DataFlowReference"
 					},
+					"staging": {
+						"linkedService": {
+							"referenceName": "serhat25adls_connection",
+							"type": "LinkedServiceReference"
+						},
+						"folderPath": "serhat25adls/Assignment"
+					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
