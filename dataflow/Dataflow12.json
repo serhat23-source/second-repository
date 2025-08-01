@@ -33,10 +33,10 @@
 					"name": "JoinedFlights"
 				},
 				{
-					"name": "filter1"
+					"name": "FilterAmountNotNull"
 				},
 				{
-					"name": "select1"
+					"name": "SelectCleanup"
 				}
 			],
 			"scriptLines": [
@@ -71,8 +71,8 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> JoinedFlights",
-				"JoinedFlights filter(!isNull(amount)) ~> filter1",
-				"filter1 select(mapColumn(",
+				"JoinedFlights filter(!isNull(amount)) ~> FilterAmountNotNull",
+				"FilterAmountNotNull select(mapColumn(",
 				"          flight_id = Flights@flight_id,",
 				"          flight_no,",
 				"          scheduled_departure,",
@@ -88,8 +88,8 @@
 				"          amount",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 sink(allowSchemaDrift: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectCleanup",
+				"SelectCleanup sink(allowSchemaDrift: true,",
 				"     validateSchema: true,",
 				"     deletable:false,",
 				"     insertable:true,",
