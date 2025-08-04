@@ -1,0 +1,114 @@
+{
+	"name": "Dataflow13",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "TitanicCSV",
+						"type": "DatasetReference"
+					},
+					"name": "Titanic"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "TitanicFailADLS",
+						"type": "DatasetReference"
+					},
+					"name": "SinkFail"
+				},
+				{
+					"dataset": {
+						"referenceName": "TitanicSuccess",
+						"type": "DatasetReference"
+					},
+					"name": "SinkSuccess"
+				}
+			],
+			"transformations": [
+				{
+					"name": "Validation"
+				},
+				{
+					"name": "Conditional"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "select2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Survived as boolean,",
+				"          Pclass as short,",
+				"          Name as string,",
+				"          Sex as string,",
+				"          Age as double,",
+				"          {Siblings/Spouses Aboard} as short,",
+				"          {Parents/Children Aboard} as short,",
+				"          Fare as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Titanic",
+				"Titanic assert(expectUnique(Name, false, 'Name_is_unique'),",
+				"     expectTrue(Fare > 0.0, false, 'Fare_positive')) ~> Validation",
+				"Validation split(hasError('Name_is_unique') || hasError('Fare_positive'),",
+				"     disjoint: false) ~> Conditional@(Fail, Success)",
+				"Conditional@Fail select(mapColumn(",
+				"          Survived,",
+				"          Pclass,",
+				"          Name,",
+				"          Sex,",
+				"          Age,",
+				"          Siblings_Spouses_Aboard = {Siblings/Spouses Aboard},",
+				"          Parents_Children_Aboard = {Parents/Children Aboard},",
+				"          Fare",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"Conditional@Success select(mapColumn(",
+				"          Survived,",
+				"          Pclass,",
+				"          Name,",
+				"          Sex,",
+				"          Age,",
+				"          {Siblings/Spouses Aboard},",
+				"          {Parents/Children Aboard},",
+				"          Fare",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkFail",
+				"select2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> SinkSuccess"
+			]
+		}
+	}
+}
