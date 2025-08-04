@@ -40,6 +40,9 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "cast1"
 				}
 			],
 			"scriptLines": [
@@ -56,8 +59,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> Titanic",
-				"Titanic assert(expectUnique(Name, false, 'Name_is_unique'),",
-				"     expectTrue(Fare > 0.0, false, 'Fare_positive')) ~> Validation",
+				"cast1 assert(expectUnique(Name, false, 'Name_is_unique'),",
+				"     expectTrue(Pclass > 0.0, false, 'Fare_positive')) ~> Validation",
 				"Validation split(hasError('Name_is_unique') || hasError('Fare_positive'),",
 				"     disjoint: false) ~> Conditional@(Fail, Success)",
 				"Conditional@Fail select(mapColumn(",
@@ -78,12 +81,23 @@
 				"          Name,",
 				"          Sex,",
 				"          Age,",
-				"          {Siblings/Spouses Aboard},",
-				"          {Parents/Children Aboard},",
+				"          Siblings_Spouses_Aboard = {Siblings/Spouses Aboard},",
+				"          Parents_Children_Aboard = {Parents/Children Aboard},",
 				"          Fare",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
+				"Titanic cast(output(",
+				"          Survived as integer,",
+				"          Pclass as decimal(10,0),",
+				"          Name as string,",
+				"          Sex as string,",
+				"          Age as integer,",
+				"          {Siblings/Spouses Aboard} as integer,",
+				"          {Parents/Children Aboard} as integer,",
+				"          Fare as decimal(10,0)",
+				"     ),",
+				"     errors: true) ~> cast1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
